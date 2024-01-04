@@ -1,7 +1,7 @@
 importScripts('js/sw-utils.js');
 
-const STATIC_CACHE = 'static-v2';
-const DYNAMIC_CACHE = 'dynamic-v1';
+const STATIC_CACHE = 'static-v4';
+const DYNAMIC_CACHE = 'dynamic-v';
 const INMUTABLE_CACHE = 'inmutable-v1';
 
 const APP_SHELL = [
@@ -51,6 +51,10 @@ self.addEventListener("activate", event => {
                 console.log("deleting");
                 return caches.delete(key);
             }
+               if (key !== DYNAMIC_CACHE && key.includes("dynamic")) {
+                   console.log("deleting dinamic");
+                   return caches.delete(key);
+               }
         })
     })
     event.waitUntil(resp)
